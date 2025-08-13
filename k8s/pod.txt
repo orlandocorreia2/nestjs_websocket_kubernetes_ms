@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: nodeserver
+spec:
+  containers:
+    - name: nodeserver
+      image: 'ocnascimento/poc_websocket:v1.0'

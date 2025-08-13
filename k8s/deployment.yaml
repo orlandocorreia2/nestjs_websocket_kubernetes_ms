@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodeserver
+  labels:
+    app: nodeserver
+spec:
+  selector:
+    matchLabels:
+      app: nodeserver
+  replicas: 10
+  template:
+    metadata:
+      labels:
+        app: nodeserver
+    spec:
+      containers:
+        - name: nodeserver
+          image: 'ocnascimento/poc_websocket:v1.1'
+
+          resources: # Define a escala vertical
+            requests:
+              cpu: 30m
+              memory: 64Mi
+            limits:
+              cpu: 30m
+              memory: 64Mi
+
+          # startupProbe: # verifica se o container está pronto para receber tráfego, somente na inicialização
+          #   httpGet:
+          #     path: /healthz
+          #     port: 3000
+          #   periodSeconds: 3
+          #   failureThreshold: 30
+          # readinessProbe: # verifica se o container está pronto para receber tráfego, e ao longo do tempo
+          #   httpGet:
+          #     path: /healthz
+          #     port: 3000
+          #   periodSeconds: 3
+          #   failureThreshold: 1
+          # initialDelaySeconds: 10
+          # livenessProbe: # verifica se o container está vivo, Se o container não responder, o Kubernetes irá reiniciá-lo.
+          #   httpGet:
+          #     path: /healthz'
+          #     port: 3000
+          #   periodSeconds: 5
+          #   failureThreshold: 1
+          #   timeoutSeconds: 1
+          #   successThreshold: 1
+          # initialDelaySeconds: 15
+          env:
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          # envFrom:
+          #   - configMapRef:
+          #       name: nodeserver-env
+          #   - secretRef:
+          #       name: nodeserver-secret
+          # volumeMounts:
+          #   - name: config
+          #     mountPath: /app/files
+          #     readOnly: true # Essa configuração não permite que o arquivo seja modificado.
+      # volumes:
+      #   - name: config
+      #     configMap:
+      #       name: configmap-family
+      #       items:
+      #         - key: members
+      #           path: my-family.txt
