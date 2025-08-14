@@ -1,0 +1,28 @@
+{
+	"info": {
+		"_postman_id": "65727f2f-e909-4035-90a0-ecd91c0ad211",
+		"name": "HTTP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1888097",
+		"_collection_link": "https://auction-properties.postman.co/workspace/Real-Time~57410af6-dc48-43ac-ac47-0d3d310ad068/collection/1888097-65727f2f-e909-4035-90a0-ecd91c0ad211?action=share&source=collection_link&creator=1888097"
+	},
+	"item": [
+		{
+			"name": "Healthz",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{http_url}}/healthz",
+					"host": [
+						"{{http_url}}"
+					],
+					"path": [
+						"healthz"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
